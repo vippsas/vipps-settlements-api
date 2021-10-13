@@ -1,4 +1,4 @@
-# Vipps eCommerce API
+# Vipps Settlements API
 
 The Vipps Settlements API is used by
 [Vipps på nett](https://vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/),
