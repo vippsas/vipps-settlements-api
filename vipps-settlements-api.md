@@ -18,6 +18,12 @@ Document version 0.0.1.
 
 ## Table of contents
 
+- [Authentication](#authentication)
+- [Example usage](#example-usage)
+  * [Request](#request)
+  * [Response](#response)
+- [Questions?](#questions-)
+
 # Authentication
 
 Please see:
