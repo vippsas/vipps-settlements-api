@@ -35,10 +35,11 @@ in the
 
 ## Request
 
-This will retrieve transactions from (and including) January 1 2021
+This will retrieve transactions for MSN 123456
+from (and including) January 1 2021
 to (and including) December 31 2021:
 
-[`GET:/experimental/salesunits/{msn}/transactions?firstdate=2021-01-01&lastdate=2021-12-31`](https://vippsas.github.io/vipps-settlements-api/#/Settlements/get-transactions-date-range)
+[`GET:/experimental/salesunits/123456/transactions?firstdate=2021-01-01&lastdate=2021-12-31`](https://vippsas.github.io/vipps-settlements-api/#/Settlements/get-transactions-date-range)
 
 Headers:
 
