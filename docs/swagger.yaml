@@ -1,7 +1,8 @@
 openapi: 3.0.0
 info:
   title: Vipps Settlements API
-  description: API to retrieve settlement data: https://github.com/vippsas/vipps-settlements-api
+  description: >-
+    API to retrieve settlement data: https://github.com/vippsas/vipps-settlements-api
   version: '0.0.2'
 servers:
   - url: https://api.vipps.no
@@ -31,8 +32,16 @@ paths:
                   $ref: '#/components/schemas/Transaction'
         '404':
           description: No transactions
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
         '400':
           description: Please be reasonable in your demands.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/Error'
       operationId: get-transactions-date-range
       description: Get transactions for the specified MSN for the specified date range.
       parameters:
@@ -92,3 +101,33 @@ components:
         message:
           type: string
           example: "One pair of Vipps socks"
+    Error:
+      type: object
+      required:
+        - errorGroup
+        - errorCode
+        - errorMessage
+      properties:
+        errorGroup:
+          type: string
+          description: "The error group. See: https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#error-groups"
+          enum:
+            - Authentication
+            - Payments
+            - InvalidRequest
+            - VippsError
+            - User
+            - Merchant
+          example: "Payments"
+        errorCode:
+          type: string
+          description: "The error code. See: https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#error-codes"
+          example: "44"
+        errorMessage:
+          type: string
+          description: "A description of what went wrong. See https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#errors"
+          example: "Refused by issuer because of expired card"
+        contextId:
+          type: string
+          description: "A unique id for this error, useful for searching in logs"
+          example: f70b8bf7-c843-4bea-95d9-94725b19895f
