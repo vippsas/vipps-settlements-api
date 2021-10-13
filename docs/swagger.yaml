@@ -104,32 +104,50 @@ components:
           type: string
           example: "One pair of Vipps socks"
     Error:
+      description: 'Standard Error accoring to the RFC'
       type: object
-      required:
-        - errorGroup
-        - errorCode
-        - errorMessage
       properties:
-        errorGroup:
+        type:
           type: string
-          description: "The error group. See: https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#error-groups"
-          enum:
-            - Authentication
-            - Payments
-            - InvalidRequest
-            - VippsError
-            - User
-            - Merchant
-          example: "Payments"
-        errorCode:
+          minLength: 1
+        title:
           type: string
-          description: "The error code. See: https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#error-codes"
-          example: "44"
-        errorMessage:
+          minLength: 1
+        detail:
           type: string
-          description: "A description of what went wrong. See https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#errors"
-          example: "Refused by issuer because of expired card"
-        contextId:
+          minLength: 1
+        instance:
           type: string
-          description: "A unique id for this error, useful for searching in logs"
-          example: f70b8bf7-c843-4bea-95d9-94725b19895f
+          minLength: 1
+        invalidParams:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - name
+              - reason
+            properties:
+              name:
+                type: string
+                minLength: 1
+              reason:
+                type: string
+                minLength: 1
+      required:
+        - type
+        - title
+        - detail
+        - instance
+        - invalidParams
+      x-examples:
+        example-1:
+          type: 'https://example.net/validation-error'
+          title: Your request parameters didn't validate.
+          detail: Optional additional information to give more detail than the title
+          instance: 123e4567-e89b-12d3-a456-426655440000
+          invalidParams:
+            - name: age
+              reason: must be a positive integer
+            - name: color
+              reason: 'must be ''green'', ''red'' or ''blue'''
