@@ -20,7 +20,7 @@ paths:
           type: string
     get:
       summary: Get transactions
-      tags: []
+      tags: [Settlements]
       operationId: get-transactions-date-range
       description: Get transactions for the specified MSN for the specified date range.
       parameters:
