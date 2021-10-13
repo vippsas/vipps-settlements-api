@@ -2,19 +2,19 @@ openapi: 3.0.0
 info:
   title: Vipps Settlements API
   description: API to retrieve settlement data.
-  version: '0.0.1'
+  version: '0.0.2'
 servers:
   - url: https://api.vipps.no
     description: Production environment
   - url: https://apitest.vipps.no
-    description: Merchant Test environment  
+    description: Merchant Test environment
 paths:
   "/experimental/salesunits/{msn}/transactions":
     parameters:
       - name: msn
         in: path
         required: true
-        example: 12345
+        example: 123456
         schema:
           type: string
     get:
@@ -31,34 +31,42 @@ paths:
                   $ref: '#/components/schemas/Transaction'
         '404':
           description: No transactions
+        '400':
+          description: Please be reasonable in your demands.
       operationId: get-transactions-date-range
       description: Get transactions for the specified MSN for the specified date range.
       parameters:
-        - schema:
-            type: string
+        - name: firstdate
           in: query
-          name: firstdate
+          schema:
+            type: string
           description: The first date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
           example: "2021-01-31"
-        - schema:
-            type: string
+        - name: lastdate
           in: query
-          name: lastdate
+          schema:
+            type: string
           description: The last date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
           example: "2021-12-31"
-        - schema:
-            type: string
+        - name: format
           in: query
-          name: format
-          description: Not implemented. Default "json".
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+              - xml
+              - pdf
+            default: "json"
+          description: Not implemented yet. Default "json".
           example: "json"
-components:        
+components:
   schemas:
     Transaction:
       description: 'Transaction'
       type: object
       required:
-        - orderID
+        - orderId
         - transactionId
         - transactionDate
         - amount
@@ -71,14 +79,15 @@ components:
         transactionId:
           type: string
           minLength: 5
-          example: 54321
+          example: 543210
         transactionDate:
           type: string
           example: "2018-11-14T15:22:46.680Z"
           description: Timestamp in ISO-8601 representing when Vipps did the payment
-          
         amount:
           type: number
+          description: >-
+            Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
           example: "49900"
         message:
           type: string
