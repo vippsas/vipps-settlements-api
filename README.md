@@ -1,4 +1,4 @@
-# Vipps Settlement API
+# Vipps Settlements API
 
 💥 DRAFT! Unfinished work in progress. Useless except for discussions in and with Vipps. 💥
 
