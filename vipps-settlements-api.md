@@ -56,6 +56,8 @@ Content-Type: application/json
 
 ## Response
 
+Let's pretend there were two transactions:
+
 ```
 [
   {
