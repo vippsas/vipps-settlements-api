@@ -4,6 +4,8 @@
 
 From the internal 2021 hackathon: #hack-team-reporters-without-apis
 
+* [Vipps Settlements API guide](vipps-settlements-api.md): Developer guide for Vipps Settlements API.
+
 You can peruse the API reference documentation as:
 * [Swagger](https://vippsas.github.io/vipps-settlements-api/)
 * [ReDoc](https://vippsas.github.io/vipps-settlements-api/redoc.html)
@@ -19,6 +21,3 @@ a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
-
-
-
