@@ -21,6 +21,35 @@ paths:
     get:
       summary: Get transactions
       tags: []
+      operationId: get-transactions-date-range
+      description: Get transactions for the specified MSN for the specified date range.
+      parameters:
+        - name: firstdate
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The first date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
+          example: "2021-01-31"
+        - name: lastdate
+          in: query
+          schema:
+            type: string
+          description: The last date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
+          example: "2021-12-31"
+        - name: format
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+              - xml
+              - pdf
+            default: "json"
+          description: Not implemented yet. Default "json".
+          example: "json"
       responses:
         '200':
           description: 'List of transactions'
@@ -42,33 +71,6 @@ paths:
             application/json;charset=UTF-8:
               schema:
                 $ref: '#/components/schemas/Error'
-      operationId: get-transactions-date-range
-      description: Get transactions for the specified MSN for the specified date range.
-      parameters:
-        - name: firstdate
-          in: query
-          schema:
-            type: string
-          description: The first date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
-          example: "2021-01-31"
-        - name: lastdate
-          in: query
-          schema:
-            type: string
-          description: The last date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
-          example: "2021-12-31"
-        - name: format
-          in: query
-          schema:
-            type: string
-            enum:
-              - json
-              - csv
-              - xml
-              - pdf
-            default: "json"
-          description: Not implemented yet. Default "json".
-          example: "json"
 components:
   schemas:
     Transaction:
