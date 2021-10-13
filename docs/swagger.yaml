@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: Vipps Settlements API
+  description: API to retrieve settlement data.
+  version: '0.0.1'
+servers:
+  - url: https://api.vipps.no
+    description: Production environment
+  - url: https://apitest.vipps.no
+    description: Merchant Test environment  
+paths:
+  "/experimental/salesunits/{msn}/transactions":
+    parameters:
+      - name: msn
+        in: path
+        required: true
+        example: 12345
+        schema:
+          type: string
+    get:
+      summary: Get transactions
+      tags: []
+      responses:
+        '200':
+          description: 'List of transactions'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+        '404':
+          description: No transactions
+      operationId: get-transactions-date-range
+      description: Get transactions for the specified MSN for the specified date range.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: firstdate
+          description: The first date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
+          example: "2021-01-31"
+        - schema:
+            type: string
+          in: query
+          name: lastdate
+          description: The last date to include. Both YYYY-MM-DD and YYYY-MM are accepted.
+          example: "2021-12-31"
+        - schema:
+            type: string
+          in: query
+          name: format
+          description: Not implemented. Default "json".
+          example: "json"
+components:        
+  schemas:
+    Transaction:
+      description: 'Transaction'
+      type: object
+      required:
+        - orderID
+        - transactionId
+        - transactionDate
+        - amount
+        - message
+      properties:
+        orderId:
+          type: string
+          minLength: 5
+          example: "acme-shop-123-order123abc"
+        transactionId:
+          type: string
+          minLength: 5
+          example: 54321
+        transactionDate:
+          type: string
+          example: "2018-11-14T15:22:46.680Z"
+          description: Timestamp in ISO-8601 representing when Vipps did the payment
+          
+        amount:
+          type: number
+          example: "49900"
+        message:
+          type: string
+          example: "One pair of Vipps socks"
