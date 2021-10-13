@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Vipps Settlements API
-  description: API to retrieve settlement data.
+  description: API to retrieve settlement data: https://github.com/vippsas/vipps-settlements-api
   version: '0.0.2'
 servers:
   - url: https://api.vipps.no
